@@ -1,33 +1,48 @@
 
 //Generate a random number from 1 to 6:
-const firstRandomNum = Math.floor(Math.random()*6) + 1;
+//const firstRandomNum = Math.floor(Math.random()*6) + 1;
 
 //Generate a string of images from images/dice1.jpeg upto images/dice6.jpeg
-const firstDiceImage = 'cards/dice' + firstRandomNum + '.jpeg';
+//const firstDiceImage = 'cards/dice' + firstRandomNum + '.jpeg';
 
-document.querySelectorAll('img')[0].setAttribute('src', firstDiceImage);
+//document.querySelectorAll('img')[0].setAttribute('src', firstDiceImage);
+
 
 
 
 
 //Generate a random number from 1 to 6:
-const secondRandomNum = Math.floor(Math.random()*6) + 1;
+//const secondRandomNum = Math.floor(Math.random()*6) + 1;
 
 //Generate a string of images from images/dice1.jpeg upto images/dice6.jpeg
-const secondDiceImage = 'cards/dice' + secondRandomNum + '.jpeg';
-
-document.querySelectorAll('img')[1].setAttribute('src', secondDiceImage);
 
 
-//Logic for the winner.
-if(firstRandomNum > secondRandomNum) {
-    document.querySelector('h1').innerHTML = 'The winner is User 1';
+
+
+//function to roll the dice
+function rollDice(scoreId){
+    let dice = Math.floor(Math.random()*6) + 1;
+    document.getElementById(scoreId).innerHTML = parseInt(document.getElementById(scoreId).innerHTML) + dice;
+    document.getElementById("counter").innerHTML  =  parseInt(document.getElementById("counter").innerHTML) + 1;
+    displayDice(dice);
+    if(parseInt(document.getElementById("counter").innerHTML)==6){
+        displayWinner();
+    }
 }
 
-else if(firstRandomNum < secondRandomNum){
-    document.querySelector('h1').innerHTML = 'The winner is User 2';
+function displayWinner(){
+    if(parseInt(document.getElementById("score1").innerHTML) > parseInt(document.getElementById("score2").innerHTML)){
+        document.querySelector('h1').innerHTML = 'The winner is User 1';
+    }
+    else if(parseInt(document.getElementById("score1").innerHTML) < parseInt(document.getElementById("score2").innerHTML)){
+        document.querySelector('h1').innerHTML = 'The winner is User 2';
+    }
+    else{
+        document.querySelector('h1').innerHTML = "It's a Draw";
+    }
 }
 
-else{
-    document.querySelector('h1').innerHTML = "It's a Draw";
+function displayDice(num){
+    let imageName = "/cards/dice" + num + ".jpeg";
+    document.getElementById("dice-image").src = imageName;
 }
